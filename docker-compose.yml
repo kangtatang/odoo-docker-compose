@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432" 
+    container_name: odoo-db
+    restart: always
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  odoo:
+    image: odoo:18.0
+    container_name: odoo-web
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./odoo/addons:/mnt/extra-addons
+      # - ./odoo/extra-addons:/mnt/extra-addons
+      - ./odoo/config/odoo.conf:/etc/odoo/odoo.conf
+      - ./data/odoo:/var/lib/odoo
+      - ./logs/odoo:/var/log/odoo
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo

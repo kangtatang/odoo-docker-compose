@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="view_person_tree" model="ir.ui.view">
+    <field name="name">my_module.person.tree</field>
+    <field name="model">my_module.person</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="age"/>
+        <field name="email"/>
+        <field name="address"/>
+        <field name="phone"/>
+      </tree>
+    </field>
+    <field name="type">tree</field>
+  </record>
+
+  <!-- Form View -->
+  <record id="view_person_form" model="ir.ui.view">
+    <field name="name">my_module.person.form</field>
+    <field name="model">my_module.person</field>
+    <field name="priority">10</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="email"/>
+          </group>
+          <group>
+            <field name="address"/>
+            <field name="phone"/>
+          </group>
+          <group>
+            <field name="is_active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Search View -->
+  <record id="view_person_search" model="ir.ui.view">
+    <field name="name">my_module.person.search</field>
+    <field name="model">my_module.person</field>
+    <field name="priority">10</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="email"/>
+        <filter string="Active" name="active" domain="[('is_active','=',True)]"/>
+      </search>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_person" model="ir.actions.act_window">
+    <field name="name">Persons</field>
+    <field name="res_model">my_module.person</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menu -->
+  <menuitem id="menu_person_root" name="Persons" sequence="10"/>
+  <menuitem id="menu_person" name="All Persons" parent="menu_person_root" action="action_person"/>
+
+</odoo>

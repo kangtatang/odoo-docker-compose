@@ -1,0 +1,49 @@
+# ========================================
+# Docker & Compose
+# ========================================
+.env
+.env.local
+*.env.*
+docker-compose.override.yml
+
+# Named volumes & bind mounts
+data/
+logs/
+
+# ========================================
+# Odoo specific
+# ========================================
+# Local database files
+data/postgres/
+data/odoo/
+
+# Log files
+logs/
+*.log
+
+# Pyc files & Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Editor & OS generated
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Backup & export files
+*.zip
+*.tar.gz
+*.bak
+*.sql
+*.sql.gz
+
+# ========================================
+# Optional: custom addon dev (editable)
+# ========================================
+# Ignore compiled assets or test leftovers in addons
+odoo/addons/**/__pycache__/
+odoo/addons/**/*.pyc
+odoo/addons/**/*.pyo
+odoo/addons/**/*.egg-info/
